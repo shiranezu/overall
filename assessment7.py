@@ -6,7 +6,6 @@ def count_positive_negative(numbers):
                positive += 1
           else:
                negative += 1
-     return (positive, negative) 
+     return(positive, negative) 
 
 count_positive_negative = (-1,-2,-3,-4,1,2,3,4,5,6,7)
-                         
