@@ -18,9 +18,9 @@ class BankAccount:
             print('you are unable to withdraw due to insufficient balance')
 
     def current_balance(self):
-        (f"{self.account_holder_name} has {self.balance} remaining")
-
-    def transaction_history(self, transactions):
+        return (f"{self.account_holder_name} has {self.balance} remaining")
+    
+    def transaction (self):
         return self.transaction_history
 
 
@@ -39,15 +39,33 @@ def main():
 
         if response == 1:
             name =input('Enter your name')
-            new_account = BankAccount(9127571600, name)
+            new_account = BankAccount(9127571600, name, 'savings', 20000000)
             accounts.append(new_account)
+            print('account created successfully')
         elif response == 2:
             name = input('Enter your name')
             for account in accounts:
-                if account.account_holder == name:
+                if account.account_holder_name == name:
                     amount= int(input('please enter your amount: '))
-                    print(account.deposit_funds(amount))
+                    
+                    print(account.deposit(amount))
                     break
-            else:
-                print(' insufficient amount')
+                else:
+                    print(' insufficient amount')
+        elif response == 3:
+            name = input('Please enter name')
+            for account in accounts:
+                if name == account.account_holder_name:
+                    withdraw_amount = int(input('amount to withdraw:'))
+                    account.withdraw(withdraw_amount)
+                    print(' withdrawal confirmed')
+                    break
+                else:
+                    print('withdrawal failed')
+        elif response == 4:
+            name = input('enter your name')
+            for account in accounts:
+                if name == account.account_holder_name:
 
+                    print(account.current_balance())
+main()
