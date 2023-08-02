@@ -24,7 +24,7 @@ class student_record_manager:
     def get_student(self, id: int) -> Student:
         students = self.read_records()
         if id not in students:
-            raise StudentNotFoundError('Stusent id not found.')
+            raise StudentNotFoundError('Student id not found.')
         return students[id]
 
 
