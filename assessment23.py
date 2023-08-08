@@ -14,7 +14,7 @@ class Product:
         self.stock_quantity = stock_quantity
 
 
-class customer:
+class Customer:
     # def __init__(self,) -> None:
     #     self.db = online_shopping()
     def __init__(self, customerID, name, Email, Shipping_address):
@@ -30,7 +30,7 @@ class Order:
         self.customerID = customerID
         self.total_amount = total_amount
 
-class online_shopping:
+class Online_shopping:
     def __init__(self) -> None:
         self.__db = sql.Connect(
             host = 'localhost',
@@ -90,7 +90,7 @@ class online_shopping:
 
 
 def main():
-    users = online_shopping()
+    users = Online_shopping()
 
     while True:
         print("""Welcome to SuperMart - Your Online Shopping Destination!
@@ -116,44 +116,44 @@ Product ID: 3 | Name: Book | Category: Books | Price: $15.00 | Stock Quantity: 1
             product = (input("Enter product name: "))
                 
                 # def add_new_product(self, product):
-            for _product in self.db.add_product():
+            for _product in users.add_product():
                 if _product[1] == product.name:
                     raise Error
             else:
-                self.db.add_product(product)
+                users.add_product(product)
 
         elif choice == "3":
-                return self.db.display_product()
+                return users.display_product()
         
         elif choice == "4":
             order = (input('enter your order: '))
-            for _order in self.db.new_order():
+            for _order in users.new_order():
                 if _order[0] == order.orderID:
                     raise Error
             else:
-                return self.db.new_order()
+                return users.new_order()
             
         elif choice == '5':
-            for _order in self.db.new_order():
+            for _order in users.new_order():
                 if _order[2] == order.customerID:
                     raise Error
             else:
-                return self.db.display_order_history()
+                return users.display_order_history()
             
         elif choice == '6':
             customer = (input('Enter your name: '))
-            for _customer in self.db.add_customer():
+            for _customer in users.add_customer():
                 if _customer[1] == customer.name:
                     raise Error
             else:
-                self.db.add_customer(customer)
+                users.add_customer(customer)
 
         elif choice == '7':
-            for _customer in self.db.add_product():
+            for _customer in users.add_product():
                 if _customer[1] == customer.name:
                     raise Error
             else:
-                self.db.update_product(customer)
+                users.update_product(customer)
 
         elif choice == '8':
             exit()
