@@ -6,8 +6,7 @@ class Error(Exception):
     pass
 
 class Product:
-    def __init__(self, productID, name, category, price, stock_quantity):
-        self.productID = productID
+    def __init__(self, name, category, price, stock_quantity):
         self.name = name
         self.category = category
         self.price = price
@@ -46,7 +45,7 @@ class Online_shopping:
 
 
     def add_product(self, product):
-        self.__cursor.execute(f'INSERT INTO {self.productT} (Name, Category, Price, stock_quantity) VALUES (%s, %s, %s, %s)', (product.name, product.category, product.price, product.stock_quantity))      
+        self.__cursor.execute(f'INSERT INTO {self.productT} (name, Category, Price, stock_quantity) VALUES (%s, %s, %s, %s)', (product.name, product.category, product.price, product.stock_quantity))      
         self.__db.commit()
 
     def remove_product(self, product):
@@ -58,7 +57,7 @@ class Online_shopping:
         self.__db.commit()
 
     def display_product(self):
-        self.__cursor.execute(f'SELECT * FROM {self.presentT}')
+        self.__cursor.execute(f'SELECT * FROM {self.productT}')
         return self.__cursor.fetchall()
     
     
@@ -91,6 +90,7 @@ class Online_shopping:
 
 def main():
     users = Online_shopping()
+    cart = []
 
     while True:
         print("""Welcome to SuperMart - Your Online Shopping Destination!
@@ -113,16 +113,34 @@ Product ID: 2 | Name: T-shirt | Category: Clothing | Price: $20.00 | Stock Quant
 Product ID: 3 | Name: Book | Category: Books | Price: $15.00 | Stock Quantity: 100""")
         
         elif choice == "2":
-            product = (input("Enter product name: "))
-                
+            
+            name = input('enter product name: ').lower()
+            category = input('enter product category: ').lower()
+            price = int(input('enter product price: '))
+            stock_quantity = input('enter product stock quantity: ')
+
+            product = Product(name, category, price, stock_quantity)
                 # def add_new_product(self, product):
-            for _product in users.add_product():
+            for _product in users.display_product():
                 if _product[1] == product.name:
                     raise Error
             else:
                 users.add_product(product)
+                print("your product has been added successfully")
 
         elif choice == "3":
+            name = input('enter product name: ').lower()
+            category = input('enter product category: ').lower()
+            price = int(input('enter product price: '))
+            stock_quantity = input('enter product stock quantity: ')
+
+            product = Product(name, category, price, stock_quantity)
+                # def add_new_product(self, product):
+            for _product in users.display_product():
+                if _product[1] == product.name:
+                    raise Error
+                
+            else:
                 return users.display_product()
         
         elif choice == "4":
